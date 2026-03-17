@@ -1,0 +1,7 @@
+Because the query in fetch-data.js:4 is ordering by startdatetime, and many Shooting Permit rows have startdatetime = null (including the top records returned by your query).
+
+When the sort key is null for many rows, the API does not guarantee a stable order among those tied rows. With $limit=25, the cutoff row can flip between requests, so Manhattan count alternates (e.g., 14 vs 15).
+
+In short: unstable tie-order + hard limit = inconsistent borough counts.
+
+If you want stable results, sort by a populated field (or add a deterministic tiebreaker), e.g. enteredon DESC, eventid DESC.
