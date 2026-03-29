@@ -65,7 +65,8 @@
   <div class="overlay" onclick={() => selected = null}>
     <div class="popup" onclick={(e) => e.stopPropagation()}>
       <button class="close-btn" onclick={() => selected = null}>&times;</button>
-      <h2>{selected.business_category}</h2>
+      <h2>{selected.business_name}</h2>
+      <p><strong>Business type:</strong> {selected.business_category}</p>
       <p><strong>Location:</strong> {selected.street1}</p>
       <p><strong>Borough:</strong> {selected.borough}</p>
       <p><strong>Reported:</strong> {formatReportedDate(selected.intake_date)}</p>
