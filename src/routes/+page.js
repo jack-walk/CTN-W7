@@ -1,5 +1,5 @@
 // Page settings
-import permits from '$lib/data/permits.json';
+import complaints from '$lib/data/consumer-values.json';
 
 // These values are passed to the layout to control what appears on the page.
 export function load() {
@@ -8,6 +8,6 @@ export function load() {
     showHeader: true, 
     // Set to false to hide the site footer
     showFooter: true,
-    permits,
+    complaints,
   };
 }
