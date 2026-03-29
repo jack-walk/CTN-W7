@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "node:path";
 
-const consumerUrl = "https://data.cityofnewyork.us/resource/nre2-6m2s.json";
+const consumerUrl =
+	"https://data.cityofnewyork.us/resource/nre2-6m2s.json?$order=intake_date%20DESC&$limit=1000";
 const consumerResponse = await fetch(consumerUrl);
 const consumerValues = await consumerResponse.json();
 
