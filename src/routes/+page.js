@@ -14,6 +14,17 @@ function isBlankEntry(entry) {
   return values.every((value) => isBlankValue(value));
 }
 
+function isNotAvailableValue(value) {
+  if (typeof value !== 'string') return false;
+
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z]/g, '');
+
+  return normalized === 'na' || normalized === 'notavailable';
+}
+
 function getIntakeTimestamp(complaint) {
   const timestamp = Date.parse(complaint?.intake_date ?? '');
   return Number.isNaN(timestamp) ? 0 : timestamp;
@@ -22,6 +33,7 @@ function getIntakeTimestamp(complaint) {
 const cleanedComplaints = complaints.filter((entry) => {
   if (isBlankEntry(entry)) return false;
   if (isBlankValue(entry.business_name)) return false;
+  if (isNotAvailableValue(entry.business_name)) return false;
   if (isBlankValue(entry.complaint_code)) return false;
   return true;
 });
