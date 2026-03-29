@@ -11,8 +11,16 @@
   function formatReportedDate(dateString) {
     if (!dateString) return 'N/A';
 
-    const date = new Date(dateString);
-    if (Number.isNaN(date.getTime())) return 'N/A';
+    const [year, month, day] = dateString.split('T')[0].split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+    if (
+      Number.isNaN(date.getTime()) ||
+      Number.isNaN(year) ||
+      Number.isNaN(month) ||
+      Number.isNaN(day)
+    ) {
+      return 'N/A';
+    }
 
     const datePart = new Intl.DateTimeFormat('en-US', {
       month: 'long',
@@ -20,12 +28,7 @@
       year: 'numeric'
     }).format(date);
 
-    const timePart = new Intl.DateTimeFormat('en-US', {
-      hour: 'numeric',
-      minute: '2-digit'
-    }).format(date);
-
-    return `${datePart} (${timePart})`;
+    return datePart;
   }
 </script>
 
